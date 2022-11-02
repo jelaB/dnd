@@ -153,12 +153,14 @@ p {
 
 .fbi-center {
     border-radius: 60%;
-    flex-basis: 41px;
-    height: 21px;
+    flex-basis: 51px;
+    height: 26px;
     position: relative;
     bottom: 11px;
     z-index: 2;
     background: lightgray;
+    color: black;
+    text-align: center;
     background-image: url(../images/holofoil-texture-2.jpeg);
     box-shadow:
             0 0 0 4px #171314;
