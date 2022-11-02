@@ -20,7 +20,7 @@ export function getSpellByID(spellIndex) {
     }).then(res => res.json())
         .then(response => {
             if (!response) throw new Error("Network response was not ok.");
-            return response.results;
+            return response;
         })
         .catch(handleError);
 }
