@@ -5,6 +5,7 @@ import Header from './components/common/Header'
 import PageNotFound from './components/PageNotFound'
 import SpellList from './components/spell/SpellList'
 import SpellDetail from './components/spell/SpellDetail'
+import FavoriteSpells from './components/spell/FavoriteSpells'
 
 function App () {
   return (<div className="container-fluid">
@@ -13,6 +14,7 @@ function App () {
             <Route exact path="/" element={<HomePage/>}/>
             <Route exact path="/spells" element={<SpellList/>}/>
             <Route path="/details/:index" element={<SpellDetail/>}/>
+            <Route exact path="/favs" element={<FavoriteSpells/>}/>
             <Route path="*" element={<PageNotFound/>}/>
         </Routes>
     </div>)

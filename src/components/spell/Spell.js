@@ -27,9 +27,9 @@ function Spell (props) {
 
   useEffect(() => {
     if (checkInFavorites()) {
-      setSelectedSpell({ ...selectedSpell, favorite: true, index: props.spell.index })
+      setSelectedSpell({ ...selectedSpell, favorite: true, index: props.spell.index, spell: props.spell })
     } else {
-      setSelectedSpell({ ...selectedSpell, favorite: false, index: props.spell.index })
+      setSelectedSpell({ ...selectedSpell, favorite: false, index: props.spell.index, spell: props.spell })
     }
   }, [])
 
@@ -43,10 +43,10 @@ function Spell (props) {
   // eslint-disable-next-line no-unused-vars
   function addToFav () {
     if (!selectedSpell.favorite) {
-      setSelectedSpell({ ...selectedSpell, favorite: true, index: props.spell.index })
+      setSelectedSpell({ ...selectedSpell, favorite: true, index: props.spell.index, spell: props.spell })
       dispatch(spellActions.addToFavourites(selectedSpell))
     } else {
-      setSelectedSpell({ ...selectedSpell, favorite: false, index: props.spell.index })
+      setSelectedSpell({ ...selectedSpell, favorite: false, index: props.spell.index, spell: props.spell })
       dispatch(spellActions.removeFromFavourites(selectedSpell))
     }
   }

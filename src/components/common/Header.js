@@ -7,7 +7,8 @@ const Header = () => {
   return (
         <nav>
             <NavLink to="/" activestyle={style}>Home</NavLink> {' | '}
-            <NavLink to="/spells" activestyle={style}>Spells</NavLink>
+            <NavLink to="/spells" activestyle={style}>Spells</NavLink> {' | '}
+            <NavLink to="/favs" activestyle={style}>Favourites</NavLink>
         </nav>
   )
 }
