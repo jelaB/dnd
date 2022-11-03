@@ -26,11 +26,10 @@ function Spell (props) {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    setSelectedSpell(props.spell.index)
     if (checkInFavorites()) {
-      setSelectedSpell({ ...selectedSpell, favorite: true })
+      setSelectedSpell({ ...selectedSpell, favorite: true, index: props.spell.index })
     } else {
-      setSelectedSpell({ ...selectedSpell, favorite: false })
+      setSelectedSpell({ ...selectedSpell, favorite: false, index: props.spell.index })
     }
   }, [])
 
@@ -43,11 +42,11 @@ function Spell (props) {
 
   // eslint-disable-next-line no-unused-vars
   function addToFav () {
-    if (!props.spell.favorite) {
-      props.spell.favorite = true
+    if (!selectedSpell.favorite) {
+      setSelectedSpell({ ...selectedSpell, favorite: true, index: props.spell.index })
       dispatch(spellActions.addToFavourites(selectedSpell))
     } else {
-      props.spell.favorite = false
+      setSelectedSpell({ ...selectedSpell, favorite: false, index: props.spell.index })
       dispatch(spellActions.removeFromFavourites(selectedSpell))
     }
   }
@@ -70,7 +69,7 @@ function Spell (props) {
                         <p>Duration: {props.spell.duration}</p>
                     </div>
                     <div className="favoriteIcon" onClick={addToFav}>
-                        {props.spell.favorite ? <FaHeart/> : <FaRegHeart/>}
+                        {selectedSpell.favorite ? <FaHeart/> : <FaRegHeart/>}
                     </div>
 
                     <div className="fbi-right">
