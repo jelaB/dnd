@@ -1,15 +1,15 @@
-import React from "react";
-import {NavLink} from "react-router-dom";
+import React from 'react'
+import { NavLink } from 'react-router-dom'
 
 const Header = () => {
-    const style = {color: "#F15B2A"};
+  const style = { color: '#F15B2A' }
 
-    return (
+  return (
         <nav>
-            <NavLink to="/" activestyle={style}>Home</NavLink> {" | "}
+            <NavLink to="/" activestyle={style}>Home</NavLink> {' | '}
             <NavLink to="/spells" activestyle={style}>Spells</NavLink>
         </nav>
-    );
+  )
 }
 
-export default Header;
+export default Header

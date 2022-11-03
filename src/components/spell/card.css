@@ -165,3 +165,19 @@ p {
     box-shadow:
             0 0 0 4px #171314;
 }
+
+.favoriteIcon{
+    /*flex: 1;*/
+    /*display: flex;*/
+    /*justify-content: flex-end;*/
+    border-radius: 80%;
+    flex-basis: 61px;
+    height: 26px;
+    position: relative;
+    bottom: 35px;
+    z-index: 2;
+    color: black;
+    text-align: center;
+    box-shadow:
+            0 0 0 4px #171314;
+}
