@@ -181,3 +181,17 @@ p {
     box-shadow:
             0 0 0 4px #171314;
 }
+
+.common-list {
+    list-style: none;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+}
+
+.favourite-list {
+    display: flex;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 10px;
+    flex-wrap: wrap;
+}

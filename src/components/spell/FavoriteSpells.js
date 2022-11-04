@@ -12,7 +12,7 @@ function FavoriteSpells () {
   }, [favourites])
 
   return (
-        <div>
+        <div className="favourite-list">
             { spells.length > 0
               ? spells.map((_spell) => {
                 return <Spell key={_spell.index} spell={_spell.spell}/>

@@ -20,7 +20,7 @@ function SpellList () {
   return (
         <div>
             <h2>Spells</h2>
-            <ul style={{ listStyle: 'none' }}>
+            <ul className="common-list">
                     {spells.map(_spell => {
                       if (favouriteSpells.findIndex(spell => {
                         return spell.index === _spell.index
