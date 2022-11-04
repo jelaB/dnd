@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
-import * as spellActions from '../../redux/actions/SpellActions'
+import * as spellActions from '../../redux/actions/SpellActions.js'
 import { FaRegHeart, FaHeart } from 'react-icons/fa'
 
 Spell.propTypes = {

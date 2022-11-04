@@ -1,4 +1,4 @@
-import { handleError } from './UtilsService'
+import { handleError } from './UtilsService.js'
 
 const allSpellsUrl = process.env.REACT_APP_API_SPELLS_URL
 const baseUrl = process.env.REACT_APP_API_BASE_URL

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import { getSpells } from '../../services/DndService'
-import SpellItem from './SpellItem'
+import { getSpells } from '../../services/DndService.js'
+import SpellItem from './SpellItem.js'
 import { useSelector } from 'react-redux'
 
 function SpellList () {

@@ -6,7 +6,7 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ### Requirements
 • Display a list of all spells \
-Spells are displayed on vanilla way, without pagination which could be added, but since idea behind this coding test is simple, functionalities are simple, and displayed data are simple, pagination is not mandatory.
+Spells are displaye on vanilla way, without pagination which could be added, but since idea behind this coding test is simple, functionalities are simple, and displayed data are simple, pagination is not mandatory.
 Unordered list of spells contains links to "spell detail page" as list items. Click on the links within this list is the only way for checking a details for specific spell, and consequently, the only way to put specific spell in favourites.
 
 • Allow the user to view information related to each spell \

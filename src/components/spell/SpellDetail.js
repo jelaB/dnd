@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation } from 'react-router-dom'
-import { getSpellByID } from '../../services/DndService'
-import Spell from './Spell'
+import { getSpellByID } from '../../services/DndService.js'
+import Spell from './Spell.js'
 import './card.css'
 
 function SpellDetail () {

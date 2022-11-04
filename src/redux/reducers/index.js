@@ -1,5 +1,5 @@
 import { combineReducers } from 'redux'
-import favourites from './SpellReducer'
+import favourites from './SpellReducer.js'
 
 const rootReducer = combineReducers({
   favourites
