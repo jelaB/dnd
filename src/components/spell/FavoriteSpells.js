@@ -1,7 +1,7 @@
 
 import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
-import Spell from './Spell.js'
+import Spell from './Spell'
 
 function FavoriteSpells () {
   const favourites = useSelector(state => state.favourites)
