@@ -26,7 +26,7 @@ function Spell (props) {
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (checkInFavorites()) {
+    if (checkInFavorites(props.spell.index)) {
       setSelectedSpell({ ...selectedSpell, favorite: true, index: props.spell.index, spell: props.spell })
     } else {
       setSelectedSpell({ ...selectedSpell, favorite: false, index: props.spell.index, spell: props.spell })
@@ -53,30 +53,33 @@ function Spell (props) {
 
   return (<div className='card-container'>
         <div className='card-background'>
-            <div className='card-frame'>
+          {(selectedSpell === '')
+            ? <p> LOADING ... </p>
+            : <div className='card-frame'>
                 <div className='frame-header'>
-                    <h1 className='name'>{props.spell.name}</h1>
+                  <h1 className='name'>{selectedSpell.spell.name}</h1>
                 </div>
                 <div className="frame-text-box">
-                    <p className="description ftb-inner-margin">{props.spell.desc[0]} </p>
-                    <p className="description">{props.spell.higher_level[0]}</p>
-                    <p className="flavour-text">{props.spell.material}</p>
+                  <p className="description ftb-inner-margin">{selectedSpell.spell.desc[0]} </p>
+                  <p className="description">{selectedSpell.spell.higher_level[0]}</p>
+                  <p className="flavour-text">{selectedSpell.spell.material}</p>
                 </div>
 
                 <div className="frame-bottom-info inner-margin">
-                    <div className="fbi-left">
-                        <p>Range: {props.spell.range}</p>
-                        <p>Duration: {props.spell.duration}</p>
-                    </div>
-                    <div className="favoriteIcon" onClick={addToFav}>
-                        {selectedSpell.favorite ? <FaHeart/> : <FaRegHeart/>}
-                    </div>
+                  <div className="fbi-left">
+                    <p>Range: {selectedSpell.spell.range}</p>
+                    <p>Duration: {selectedSpell.spell.duration}</p>
+                  </div>
+                  <div className="favoriteIcon" onClick={addToFav}>
+                    {selectedSpell.favorite ? <FaHeart/> : <FaRegHeart/>}
+                  </div>
 
-                    <div className="fbi-right">
-                        Components: {props.spell.components}
-                    </div>
+                  <div className="fbi-right">
+                    Components: {selectedSpell.spell.components}
+                  </div>
                 </div>
-            </div>
+              </div>
+          }
         </div>
     </div>)
 }

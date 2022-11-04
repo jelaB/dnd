@@ -13,7 +13,7 @@ function SpellDetail () {
   }, [location.state.url])
 
   return (<div>
-    {(spellDetails === null) ? <p> LOADING ... </p> : <Spell spell={spellDetails}></Spell> }
+    {(spellDetails === null) ? <p> LOADING ... </p> : <Spell index={spellDetails.index} spell={spellDetails}></Spell> }
   </div>)
 }
 
