@@ -5,13 +5,18 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ## Project description
 
 ### Requirements
-• Display a list of all spells
+• Display a list of all spells \
+Spells are displayed on vanilla way, without pagination which could be added, but since idea behind this coding test is simple, functionalities are simple, and displayed data are simple, pagination is not mandatory.
+Unordered list of spells contains links to "spell detail page" as list items. Click on the links within this list is the only way for checking a details for specific spell, and consequently, the only way to put specific spell in favourites.
 
 • Allow the user to view information related to each spell \
 The idea was to use some nice style resource and add functional requirements within existing elements of the choosed resource.\
 Spell details are displayed in card styled via [using this style](https://codeburst.io/make-a-magic-the-gathering-card-in-css-5e4e06a5e604).
+Every spell card contains a "heart button" at the bottom, which is provided with the goal of adding currently displayed spell to favourites.
 
-• Allow the user to save spells to a list of favourites
+• Allow the user to save spells to a list of favourites \
+List of favourites is a list of 'spell cards' with full spell details. Spell could be removed from favourites only via [favourites page](http://localhost:3000/favs). 
+Additionally, information about which spell is considered as favourite is also available from the [main spell list display](http://localhost:3000/spells) where a heart icon is displayed near spell name.
 
 ### Solution repo
 https://github.com/jelaB/dnd
