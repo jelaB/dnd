@@ -1,8 +1,9 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import PropTypes from 'prop-types'
-import { useDispatch, useSelector } from 'react-redux'
+import { useDispatch } from 'react-redux'
 import * as spellActions from '../../redux/actions/SpellActions'
-import { FaRegHeart, FaHeart } from 'react-icons/fa'
+import { FaHeart, FaRegHeart } from 'react-icons/fa'
+import { isFavourite } from '../../util/storageUtil'
 
 Spell.propTypes = {
   spell: PropTypes.shape({
@@ -15,73 +16,67 @@ Spell.propTypes = {
     desc: PropTypes.array,
     range: PropTypes.string,
     duration: PropTypes.string,
-    favorite: PropTypes.bool
-  })
+    favorite: PropTypes.bool,
+  }),
 }
 
-function Spell (props) {
-  const favourites = useSelector(state => state.favourites)
-  const [selectedSpell, setSelectedSpell] = useState('')
+function Spell(props) {
+  const [selectedSpell, setSelectedSpell] = useState(props.spell)
 
   const dispatch = useDispatch()
 
-  useEffect(() => {
-    if (checkInFavorites(props.spell.index)) {
-      setSelectedSpell({ ...selectedSpell, favorite: true, index: props.spell.index, spell: props.spell })
-    } else {
-      setSelectedSpell({ ...selectedSpell, favorite: false, index: props.spell.index, spell: props.spell })
-    }
-  }, [])
-
-  function checkInFavorites (index) {
-    const indexOfObject = favourites.data.findIndex(spell => {
-      return spell.index === index
-    })
-    return indexOfObject === -1 ? null : favourites.data[indexOfObject]
-  }
-
-  // eslint-disable-next-line no-unused-vars
-  function addToFav () {
-    if (!selectedSpell.favorite) {
-      setSelectedSpell({ ...selectedSpell, favorite: true, index: props.spell.index, spell: props.spell })
+  function addToFav() {
+    if (!isFavourite(selectedSpell.url)) {
+      setSelectedSpell({
+        ...selectedSpell,
+        favorite: true,
+      })
       dispatch(spellActions.addToFavourites(selectedSpell))
     } else {
-      setSelectedSpell({ ...selectedSpell, favorite: false, index: props.spell.index, spell: props.spell })
+      setSelectedSpell({
+        ...selectedSpell,
+        favorite: false,
+      })
       dispatch(spellActions.removeFromFavourites(selectedSpell))
     }
   }
 
-  return (<div className='card-container'>
-        <div className='card-background'>
-          {(selectedSpell === '')
-            ? <p> LOADING ... </p>
-            : <div className='card-frame'>
-                <div className='frame-header'>
-                  <h1 className='name'>{selectedSpell.spell.name}</h1>
-                </div>
-                <div className="frame-text-box">
-                  <p className="description ftb-inner-margin">{selectedSpell.spell.desc[0]} </p>
-                  <p className="description">{selectedSpell.spell.higher_level[0]}</p>
-                  <p className="flavour-text">{selectedSpell.spell.material}</p>
-                </div>
+  return (
+    <div className="card-container">
+      <div className="card-background">
+        {selectedSpell === '' ? (
+          <p> LOADING ... </p>
+        ) : (
+          <div className="card-frame">
+            <div className="frame-header">
+              <h1 className="name">{selectedSpell.name}</h1>
+            </div>
+            <div className="frame-text-box">
+              <p className="description ftb-inner-margin">
+                {selectedSpell.desc[0]}{' '}
+              </p>
+              <p className="description">{selectedSpell.higher_level[0]}</p>
+              <p className="flavour-text">{selectedSpell.material}</p>
+            </div>
 
-                <div className="frame-bottom-info inner-margin">
-                  <div className="fbi-left">
-                    <p>Range: {selectedSpell.spell.range}</p>
-                    <p>Duration: {selectedSpell.spell.duration}</p>
-                  </div>
-                  <div className="favoriteIcon" onClick={addToFav}>
-                    {selectedSpell.favorite ? <FaHeart/> : <FaRegHeart/>}
-                  </div>
-
-                  <div className="fbi-right">
-                    Components: {selectedSpell.spell.components}
-                  </div>
-                </div>
+            <div className="frame-bottom-info inner-margin">
+              <div className="fbi-left">
+                <p>Range: {selectedSpell.range}</p>
+                <p>Duration: {selectedSpell.duration}</p>
               </div>
-          }
-        </div>
-    </div>)
+              <div className="favoriteIcon" onClick={addToFav}>
+                {selectedSpell.favorite ? <FaHeart /> : <FaRegHeart />}
+              </div>
+
+              <div className="fbi-right">
+                Components: {selectedSpell.components}
+              </div>
+            </div>
+          </div>
+        )}
+      </div>
+    </div>
+  )
 }
 
 export default Spell

@@ -6,15 +6,21 @@ import App from './App'
 import './index.css'
 // import storeConfiguration from './redux/configureStore'
 import { Provider as ReduxProvider } from 'react-redux'
-import rootReducer from './redux/reducers/index'
-import { createStore } from 'redux'
+import rootReducer from './redux/reducers'
+import { applyMiddleware, createStore } from 'redux'
+import thunk from 'redux-thunk'
+import { composeWithDevTools } from 'redux-devtools-extension'
 
-const store = createStore(rootReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()); const root = createRoot(document.getElementById('root'))
+export const store = createStore(
+  rootReducer,
+  composeWithDevTools(applyMiddleware(thunk))
+)
+const root = createRoot(document.getElementById('root'))
 
 root.render(
-    <ReduxProvider store={store}>
+  <ReduxProvider store={store}>
     <Router>
-        <App/>
+      <App />
     </Router>
-    </ReduxProvider>
+  </ReduxProvider>
 )
