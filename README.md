@@ -26,30 +26,6 @@ via [favourites page](http://localhost:3000/favs).
 Additionally, information about which spell is considered as favourite is also available from
 the [main spell list display](http://localhost:3000/spells) where a heart icon is displayed near spell name.
 
-### Solution discussion
-
-There are a few places in the solution which could be discussed in terms of efficiency. The first point for discussion
-is the decision to store
-complete '
-spell
-detail' info retrieved from http://www.dnd5eapi.co/api/spells/{index} in redux state. This decision was made because of
-the visual
-representation in the 'Favourites' list. Since 'cards' visualization is selected as a more 'user-friendly' option,
-storing
-full details was the outcome. Of course, there were a few other decisions on the table, like storing URL value for every
-favourite spell and then retrieving data via API in the moment of 'Favourites' page visualization, but then it comes to
-the question of what action is 'more expensive', storing details in the redux for every spell, or pinging API for every
-URL,
-and retrieving details as a response? In any case, since API objected here does not contain a significant amount of
-data,
-both solutions are supposed to be acceptable. Also, in the implementation was used redux library to reduce unnecessary
-API calls, and to improve props and state propagation between components, but this also could be a place for discussion.
-Card used for spell details display contain a heart button for selecting if spell is favourite or not. Since redux is
-used for persistence of data, and spells are displayed from that place, it is questioned if spells stored in the regular
-spell list supposed to be expanded with one more attribute as a favourite flag role, with the aim of maintaining
-consistent info for related data stored on multiple places. Also, regarding test coverage, only unit tests for services
-in charge of communication with API are covered, and there are other test which could be introduced.
-
 ### Solution repo
 
 https://github.com/jelaB/dnd

@@ -10,7 +10,6 @@ import rootReducer from './redux/reducers'
 import { applyMiddleware, createStore } from 'redux'
 import thunk from 'redux-thunk'
 import { composeWithDevTools } from 'redux-devtools-extension'
-import { storageRemove } from './util/storageUtil'
 
 export const store = createStore(
   rootReducer,
@@ -25,14 +24,3 @@ root.render(
     </Router>
   </ReduxProvider>
 )
-
-window.addEventListener('beforeunload', () => {
-  storageRemove('favourites')
-})
-if (window.performance) {
-  console.info('window.performance is supported')
-  if (performance.navigation.type === performance.navigation.TYPE_RELOAD) {
-    console.info('This page is reloaded')
-    storageRemove('favourites')
-  }
-}
