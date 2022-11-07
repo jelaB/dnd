@@ -1,11 +1,12 @@
-import React, { useState } from 'react'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import * as spellActions from '../../redux/actions/SpellActions'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { isFavourite } from '../../util/storageUtil'
 
 Spell.propTypes = {
+  index: PropTypes.string,
   spell: PropTypes.shape({
     index: PropTypes.string,
     name: PropTypes.string,
@@ -16,60 +17,64 @@ Spell.propTypes = {
     desc: PropTypes.array,
     range: PropTypes.string,
     duration: PropTypes.string,
-    favorite: PropTypes.bool,
+    favourite: PropTypes.bool,
   }),
 }
 
 function Spell(props) {
-  const [selectedSpell, setSelectedSpell] = useState(props.spell)
+  const { spells } = useSelector((state) => state)
 
   const dispatch = useDispatch()
 
   function addToFav() {
-    if (!isFavourite(selectedSpell.url)) {
-      setSelectedSpell({
-        ...selectedSpell,
-        favorite: true,
-      })
-      dispatch(spellActions.addToFavourites(selectedSpell))
+    if (!isFavourite(props.index)) {
+      dispatch(spellActions.addToFavourites(props.spell))
     } else {
-      setSelectedSpell({
-        ...selectedSpell,
-        favorite: false,
-      })
-      dispatch(spellActions.removeFromFavourites(selectedSpell))
+      dispatch(spellActions.removeFromFavourites(props.spell))
     }
   }
 
   return (
     <div className="card-container">
       <div className="card-background">
-        {selectedSpell === '' ? (
+        {spells.spellDetails[props.spell.index] === undefined ? (
           <p> LOADING ... </p>
         ) : (
           <div className="card-frame">
             <div className="frame-header">
-              <h1 className="name">{selectedSpell.name}</h1>
+              <h1 className="name">
+                {spells.spellDetails[props.spell.index].name}
+              </h1>
             </div>
             <div className="frame-text-box">
               <p className="description ftb-inner-margin">
-                {selectedSpell.desc[0]}{' '}
+                {spells.spellDetails[props.spell.index].desc[0]}{' '}
               </p>
-              <p className="description">{selectedSpell.higher_level[0]}</p>
-              <p className="flavour-text">{selectedSpell.material}</p>
+              <p className="description">
+                {spells.spellDetails[props.spell.index].higher_level[0]}
+              </p>
+              <p className="flavour-text">
+                {spells.spellDetails[props.spell.index].material}
+              </p>
             </div>
 
             <div className="frame-bottom-info inner-margin">
               <div className="fbi-left">
-                <p>Range: {selectedSpell.range}</p>
-                <p>Duration: {selectedSpell.duration}</p>
+                <p>Range: {spells.spellDetails[props.spell.index].range}</p>
+                <p>
+                  Duration: {spells.spellDetails[props.spell.index].duration}
+                </p>
               </div>
               <div className="favoriteIcon" onClick={addToFav}>
-                {selectedSpell.favorite ? <FaHeart /> : <FaRegHeart />}
+                {spells.spellDetails[props.spell.index].favourite ? (
+                  <FaHeart />
+                ) : (
+                  <FaRegHeart />
+                )}
               </div>
 
               <div className="fbi-right">
-                Components: {selectedSpell.components}
+                Components: {spells.spellDetails[props.spell.index].components}
               </div>
             </div>
           </div>

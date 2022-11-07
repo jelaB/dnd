@@ -6,19 +6,12 @@ export const getFavouriteSpells = () =>
 export const storageRemove = (key) => {
   localStorage.removeItem(key)
 }
-
-export const isFavourite = (key) => {
-  const favStorage = getFavouriteSpells()
-  return (
-    favStorage.findIndex((spell) => {
-      return spell.index === key
-    }) > -1
-  )
-}
-
 export const getFavouriteIndex = (key) => {
   const favStorage = getFavouriteSpells()
   return favStorage.findIndex((spell) => {
     return spell.index === key
   })
+}
+export const isFavourite = (key) => {
+  return getFavouriteSpells().includes(key)
 }

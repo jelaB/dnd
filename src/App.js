@@ -1,6 +1,5 @@
 import React from 'react'
 import { Route, Routes } from 'react-router-dom'
-import HomePage from './pages/home/HomePage'
 import Header from './components/Header'
 import PageNotFound from './pages/PageNotFound'
 import SpellList from './pages/SpellList'
@@ -12,8 +11,7 @@ function App() {
     <div className="container-fluid">
       <Header />
       <Routes>
-        <Route exact path="/" element={<HomePage />} />
-        <Route exact path="/spells" element={<SpellList />} />
+        <Route exact path="/" element={<SpellList />} />
         <Route path="/details/:index" element={<SpellDetail />} />
         <Route exact path="/favs" element={<FavouriteSpells />} />
         <Route path="*" element={<PageNotFound />} />

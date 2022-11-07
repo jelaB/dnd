@@ -1,29 +1,29 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
-import { getSpellByID } from '../services/DndService.js'
 import Spell from '../components/spell/Spell.js'
 import '../components/spell/card.css'
-import { isFavourite } from '../util/storageUtil'
+import { fetchSpellDetails } from '../util/spellListFetch'
+import { useDispatch, useSelector } from 'react-redux'
 
 function SpellDetail() {
-  const [spellDetails, setSpellDetails] = useState(null)
+  const { spells } = useSelector((state) => state)
+
   const location = useLocation()
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    getSpellByID(location.state.url).then((details) =>
-      setSpellDetails({
-        ...details,
-        favorite: isFavourite(details.url),
-      })
-    )
+    dispatch(fetchSpellDetails(location.state.url))
   }, [location.state.url])
 
   return (
     <div>
-      {spellDetails === null ? (
+      {spells.spellDetails[location.state.url] === undefined ? (
         <p> LOADING ... </p>
       ) : (
-        <Spell index={spellDetails.index} spell={spellDetails}></Spell>
+        <Spell
+          index={location.state.url}
+          spell={spells.spellDetails[location.state.url]}
+        ></Spell>
       )}
     </div>
   )
