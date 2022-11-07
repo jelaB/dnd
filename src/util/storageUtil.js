@@ -9,7 +9,7 @@ export const storageRemove = (key) => {
 export const getFavouriteIndex = (key) => {
   const favStorage = getFavouriteSpells()
   return favStorage.findIndex((spell) => {
-    return spell.index === key
+    return spell === key
   })
 }
 export const isFavourite = (key) => {

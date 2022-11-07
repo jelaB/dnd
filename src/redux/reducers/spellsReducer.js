@@ -54,7 +54,10 @@ export default function spellsReducer(state = initialState, action) {
         ]
         storageSet('favourites', JSON.stringify(state.favourites))
       }
-      return state
+      return {
+        ...state,
+        favourites: state.favourites,
+      }
     default:
       return state
   }
