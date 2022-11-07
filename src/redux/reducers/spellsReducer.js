@@ -19,6 +19,11 @@ export default function spellsReducer(state = initialState, action) {
         ...state,
         spellList: action.spellList,
       }
+    case 'LOAD_FAV_LIST':
+      return {
+        ...state,
+        favourites: [...state.favourites, ...action.favList],
+      }
     case 'LOAD_SPELL_DETAILS':
       return {
         ...state,
@@ -42,6 +47,7 @@ export default function spellsReducer(state = initialState, action) {
     case 'REMOVE_FROM_FAV':
       index = getFavouriteIndex(action.spell.index)
       if (index > -1) {
+        state.spellDetails[action.spell.index].favourite = false
         state.favourites = [
           ...state.favourites.slice(0, index),
           ...state.favourites.slice(index + 1),

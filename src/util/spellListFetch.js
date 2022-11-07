@@ -1,6 +1,10 @@
 import { getSpellByID, getSpells } from '../services/DndService'
-import { loadSpellDetails, loadSpellList } from '../redux/actions/SpellActions'
-import { isFavourite } from './storageUtil'
+import {
+  loadFavouriteSpells,
+  loadSpellDetails,
+  loadSpellList,
+} from '../redux/actions/SpellActions'
+import { getFavouriteSpells, isFavourite } from './storageUtil'
 
 export const fetchSpellList = () => {
   return async (dispatch, getState) => {
@@ -16,7 +20,7 @@ export const fetchSpellList = () => {
 }
 export const fetchSpellDetails = (spellIndex) => {
   return async (dispatch, getState) => {
-    const { spells } = getState()
+    const {spells} = getState()
 
     if (spells.spellDetails[spellIndex]) {
       dispatch(loadSpellDetails(spells.spellDetails[spellIndex]))
@@ -24,6 +28,25 @@ export const fetchSpellDetails = (spellIndex) => {
       const spell = await getSpellByID(spellIndex)
       dispatch(loadSpellDetails(mapSpellDetailsToIncludeFavouriteState(spell)))
     }
+  }
+}
+
+export const fetchFavs = () => {
+  return async (dispatch, getState) => {
+    const {spells} = getState()
+
+    const favStorage = getFavouriteSpells()
+    if (favStorage.length > 0 && spells.favourites.length === 0) {
+      const promises = favStorage.map((fav) => {
+        return dispatch(fetchSpellDetails(fav))
+      })
+      Promise.all(promises).then(() =>
+          dispatch(loadFavouriteSpells(favStorage))
+      )
+    } else {
+      dispatch(loadFavouriteSpells([]))
+    }
+
   }
 }
 
