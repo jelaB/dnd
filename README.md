@@ -29,12 +29,11 @@ the [main spell list display](http://localhost:3000/spells) where a heart icon i
 ### Solution discussion
 
 There are a few places in the solution which could be discussed in terms of efficiency. The first point for discussion
-could be the decision to use session storage instead of local storage. The goal was to use some storage that is
-supported
-by the logic of removing data after the 'refresh' action. The second point for discussion is the decision to store
+is the decision to store
 complete '
 spell
-detail' info retrieved from http://www.dnd5eapi.co/api/spells/{index}. This decision was made because of the visual
+detail' info retrieved from http://www.dnd5eapi.co/api/spells/{index} in redux state. This decision was made because of
+the visual
 representation in the 'Favourites' list. Since 'cards' visualization is selected as a more 'user-friendly' option,
 storing
 full details was the outcome. Of course, there were a few other decisions on the table, like storing URL value for every

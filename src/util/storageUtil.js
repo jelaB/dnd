@@ -1,20 +1,24 @@
-export const storageGet = (key) => sessionStorage.getItem(key)
-export const storageSet = (key, value) => sessionStorage.setItem(key, value)
+export const storageGet = (key) => localStorage.getItem(key)
+export const storageSet = (key, value) => localStorage.setItem(key, value)
 export const getFavouriteSpells = () =>
   JSON.parse(storageGet('favourites') || '[]')
 
+export const storageRemove = (key) => {
+  localStorage.removeItem(key)
+}
+
 export const isFavourite = (key) => {
-  const favourites = getFavouriteSpells()
+  const favStorage = getFavouriteSpells()
   return (
-    favourites.findIndex((spell) => {
+    favStorage.findIndex((spell) => {
       return spell.index === key
     }) > -1
   )
 }
 
 export const getFavouriteIndex = (key) => {
-  const favourites = getFavouriteSpells()
-  return favourites.findIndex((spell) => {
+  const favStorage = getFavouriteSpells()
+  return favStorage.findIndex((spell) => {
     return spell.index === key
   })
 }

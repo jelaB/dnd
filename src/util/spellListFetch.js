@@ -9,11 +9,7 @@ export const fetchSpellList = () => {
       dispatch(loadSpellList(spells))
     } else {
       const spellList = await getSpells()
-      dispatch(loadSpellList(addFavouriteAttribute(spellList)))
+      dispatch(loadSpellList(spellList))
     }
   }
-}
-
-function addFavouriteAttribute(spells) {
-  return spells.map((spell) => ({ ...spell, favourite: false }))
 }
