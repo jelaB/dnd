@@ -26,6 +26,17 @@ via [favourites page](http://localhost:3000/favs).
 Additionally, information about which spell is considered as favourite is also available from
 the [main spell list display](http://localhost:3000/spells) where a heart icon is displayed near spell name.
 
+### Solution explanation
+
+The highlight of the implemented solution is the usage of the redux library and the simulation of the caching mechanism.
+The idea was to prevent application to create unnecessary calls towards offered services. Instead, the redux state
+object was used to keep lastly fetched information as its internal state, with the goal of preventing API fetch calls
+for retrieving the same data over and over. Besides that, local storage also had important role in this mechanism. The
+state in the local storage was used as an image of the results of the last app usage. More concretely, if the local
+storage has some content, on the app start, it indicates that the user already used the app, and the founded state is
+drawn in the app as the initial.
+This means, that selected favourites will keep persisted for the next iteration with app.
+
 ### Solution repo
 
 https://github.com/jelaB/dnd

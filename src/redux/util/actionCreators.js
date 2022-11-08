@@ -9,7 +9,7 @@ import {addToFav, getFavouriteSpells, isFavourite, removeFromFav,} from '../../u
  */
 export const fetchSpellList = () => {
   return async (dispatch, getState) => {
-    const {spells} = getState()
+    const { spells } = getState()
 
     if (spells.spellList.length === 0) {
       const spellList = await getSpells()
@@ -25,7 +25,7 @@ export const fetchSpellList = () => {
  */
 export const fetchSpellDetails = (spellIndex) => {
   return async (dispatch, getState) => {
-    const {spells} = getState()
+    const { spells } = getState()
 
     if (spells.spellDetails[spellIndex] === undefined) {
       const spell = await getSpellByID(spellIndex)
@@ -44,7 +44,7 @@ export const fetchSpellDetails = (spellIndex) => {
  */
 export const fetchFavs = () => {
   return async (dispatch, getState) => {
-    const {spells} = getState()
+    const { spells } = getState()
 
     const favStorage = getFavouriteSpells()
     if (favStorage.length > spells.favourites.length) {
@@ -55,7 +55,7 @@ export const fetchFavs = () => {
         return dispatch(fetchSpellDetails(fav))
       })
       Promise.all(promises).then(() =>
-          dispatch(loadFavouriteSpells(filteredFav))
+        dispatch(loadFavouriteSpells(filteredFav))
       )
     }
   }
@@ -69,9 +69,9 @@ export const fetchFavs = () => {
  */
 export const addToFavourites = (index) => {
   return async (dispatch, getState) => {
+    addToFav(index)
     fetchSpellDetails(index)
     dispatch(spellActions.addToFavourites(index))
-    addToFav(index)
   }
 }
 
@@ -83,9 +83,9 @@ export const addToFavourites = (index) => {
  */
 export const removeFromFavourites = (index) => {
   return async (dispatch, getState) => {
+    removeFromFav(index)
     fetchSpellDetails(index)
     dispatch(spellActions.removeFromFavourites(index))
-    removeFromFav(index)
   }
 }
 

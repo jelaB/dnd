@@ -24,7 +24,10 @@ export const removeFromFav = (index) => {
     const favs = getFavouriteSpells()
     storageSet(
       'favourites',
-      JSON.stringify([...favs.slice(0, index), ...favs.slice(index + 1)])
+      JSON.stringify([
+        ...favs.slice(0, existingIndex),
+        ...favs.slice(existingIndex + 1),
+      ])
     )
   }
 }
