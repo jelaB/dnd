@@ -1,4 +1,4 @@
-import { getSpells } from './DndService'
+import { getSpells } from './dndService'
 
 const MOCK_SPELLS = {
   count: 319,
@@ -6,27 +6,27 @@ const MOCK_SPELLS = {
     {
       index: 'acid-arrow',
       name: 'Acid Arrow',
-      url: '/api/spells/acid-arrow'
+      url: '/api/spells/acid-arrow',
     },
     {
       index: 'acid-splash',
       name: 'Acid Splash',
-      url: '/api/spells/acid-splash'
-    }
-  ]
+      url: '/api/spells/acid-splash',
+    },
+  ],
 }
 
 const MOCK_SPELLS_RESULTS = [
   {
     index: 'acid-arrow',
     name: 'Acid Arrow',
-    url: '/api/spells/acid-arrow'
+    url: '/api/spells/acid-arrow',
   },
   {
     index: 'acid-splash',
     name: 'Acid Splash',
-    url: '/api/spells/acid-splash'
-  }
+    url: '/api/spells/acid-splash',
+  },
 ]
 
 const MOCK_ALL_SPELLS_API = 'https://www.dnd5eapi.co/api/spells'
@@ -57,8 +57,6 @@ describe('When the promise is rejected', () => {
     } catch (e) {
       expect(e).toBe('API is down')
     }
-    expect(fetch).toHaveBeenCalledWith(
-        MOCK_ALL_SPELLS_API, { method: 'GET' }
-    )
+    expect(fetch).toHaveBeenCalledWith(MOCK_ALL_SPELLS_API, { method: 'GET' })
   })
 })

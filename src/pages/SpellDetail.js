@@ -2,7 +2,7 @@ import React, { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 import Spell from '../components/spell/Spell.js'
 import '../components/spell/card.css'
-import { fetchSpellDetails } from '../util/spellListFetch'
+import { fetchSpellDetails } from '../redux/util/actionCreators'
 import { useDispatch, useSelector } from 'react-redux'
 
 function SpellDetail() {

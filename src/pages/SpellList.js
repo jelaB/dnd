@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react'
 import SpellItem from '../components/spell/SpellItem'
 import { useDispatch, useSelector } from 'react-redux'
-import { fetchSpellList } from '../util/spellListFetch'
+import { fetchSpellList } from '../redux/util/actionCreators'
 
 function SpellList() {
   const { spells } = useSelector((state) => state)

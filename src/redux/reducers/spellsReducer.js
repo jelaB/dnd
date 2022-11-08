@@ -1,8 +1,4 @@
-import {
-  getFavouriteIndex,
-  isFavourite,
-  storageSet,
-} from '../../util/storageUtil'
+import { isFavourite } from '../../util/storageUtil'
 
 const initialState = {
   spellList: [],
@@ -11,8 +7,6 @@ const initialState = {
 }
 
 export default function spellsReducer(state = initialState, action) {
-  let index
-  let favourites
   switch (action.type) {
     case 'LOAD_SPELL_LIST':
       return {
@@ -32,32 +26,42 @@ export default function spellsReducer(state = initialState, action) {
           [action.spellDetails.index]: action.spellDetails,
         },
       }
-    case 'ADD_TO_FAV':
-      if (!isFavourite(action.spell.index)) {
-        state.spellDetails[action.spell.index].favourite = true
-        favourites = [...state.favourites, action.spell.index]
-        storageSet('favourites', JSON.stringify(favourites))
+    case 'ADD_TO_FAV': {
+      if (!isFavourite(action.spell)) {
+        const spellToUpdate = {
+          ...state.spellDetails[action.spell],
+          favourite: true,
+        }
+
         return {
           ...state,
-          favourites: [...state.favourites, action.spell.index],
+          spellDetails: {
+            ...state.spellDetails,
+            [action.spell]: spellToUpdate,
+          },
+          favourites: [...state.favourites, action.spell],
         }
       }
       return state
-
-    case 'REMOVE_FROM_FAV':
-      index = getFavouriteIndex(action.spell.index)
-      if (index > -1) {
-        state.spellDetails[action.spell.index].favourite = false
-        state.favourites = [
-          ...state.favourites.slice(0, index),
-          ...state.favourites.slice(index + 1),
-        ]
-        storageSet('favourites', JSON.stringify(state.favourites))
+    }
+    case 'REMOVE_FROM_FAV': {
+      const updatedFavourites = [...state.favourites].filter(
+        (item) => item !== action.spell
+      )
+      const spellToUpdate = {
+        ...state.spellDetails[action.spell],
+        favourite: false,
       }
+
       return {
         ...state,
-        favourites: state.favourites,
+        spellDetails: {
+          ...state.spellDetails,
+          [action.spell]: spellToUpdate,
+        },
+        favourites: [...updatedFavourites],
       }
+    }
     default:
       return state
   }

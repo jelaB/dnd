@@ -1,9 +1,12 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
-import * as spellActions from '../../redux/actions/SpellActions'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
 import { isFavourite } from '../../util/storageUtil'
+import {
+  addToFavourites,
+  removeFromFavourites,
+} from '../../redux/util/actionCreators'
 
 Spell.propTypes = {
   index: PropTypes.string,
@@ -28,9 +31,9 @@ function Spell(props) {
 
   function addToFav() {
     if (!isFavourite(props.index)) {
-      dispatch(spellActions.addToFavourites(props.spell))
+      dispatch(addToFavourites(props.index))
     } else {
-      dispatch(spellActions.removeFromFavourites(props.spell))
+      dispatch(removeFromFavourites(props.index))
     }
   }
 
@@ -65,7 +68,7 @@ function Spell(props) {
                   Duration: {spells.spellDetails[props.spell.index].duration}
                 </p>
               </div>
-              <div className="favoriteIcon" onClick={addToFav}>
+              <div className="favorite-icon" onClick={addToFav}>
                 {spells.spellDetails[props.spell.index].favourite ? (
                   <FaHeart />
                 ) : (
