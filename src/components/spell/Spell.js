@@ -2,7 +2,6 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { useDispatch, useSelector } from 'react-redux'
 import { FaHeart, FaRegHeart } from 'react-icons/fa'
-import { isFavourite } from '../../util/storageUtil'
 import {
   addToFavourites,
   removeFromFavourites,
@@ -30,10 +29,10 @@ function Spell(props) {
   const dispatch = useDispatch()
 
   function addToFav() {
-    if (!isFavourite(props.index)) {
-      dispatch(addToFavourites(props.index))
+    if (!spells.spellDetails[props.spell.index].favourite) {
+      dispatch(addToFavourites(props.spell.index))
     } else {
-      dispatch(removeFromFavourites(props.index))
+      dispatch(removeFromFavourites(props.spell.index))
     }
   }
 

@@ -15,8 +15,8 @@ function FavouriteSpells() {
     <div className="favourite-list">
       {spells.favourites.length === 0 ? (
         <p>
-          NO SAVED SPELLS IN FAVOURITE LIST...<br></br> GO ON SPELLS LINK IN NAV
-          BAR TO CHECK ALL SPELLS!{' '}
+          NO SAVED SPELLS IN FAVOURITE LIST...<br></br> GO ON SPELLS LINK IN NAV BAR TO CHECK ALL
+          SPELLS!{' '}
         </p>
       ) : (
         <div className="favourite-list">

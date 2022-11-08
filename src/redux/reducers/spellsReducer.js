@@ -1,5 +1,3 @@
-import { isFavourite } from '../../util/storageUtil'
-
 const initialState = {
   spellList: [],
   favourites: [],
@@ -27,7 +25,7 @@ export default function spellsReducer(state = initialState, action) {
         },
       }
     case 'ADD_TO_FAV': {
-      if (!isFavourite(action.spell)) {
+      if (!state.spellDetails[action.spell].favourite) {
         const spellToUpdate = {
           ...state.spellDetails[action.spell],
           favourite: true,
