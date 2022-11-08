@@ -1,7 +1,7 @@
 import { getSpells } from './dndService'
 
 const MOCK_SPELLS = {
-  count: 319,
+  count: 2,
   results: [
     {
       index: 'acid-arrow',

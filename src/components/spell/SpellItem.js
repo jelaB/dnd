@@ -20,6 +20,7 @@ function SpellItem(props) {
         <Link
           to={'/details/' + props.spell.index}
           state={{ url: props.spell.index }}
+          data-testid={props.spell.index}
         >
           {props.spell.name}
         </Link>
