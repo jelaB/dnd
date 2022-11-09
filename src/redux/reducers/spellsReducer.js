@@ -25,22 +25,19 @@ export default function spellsReducer(state = initialState, action) {
         },
       }
     case 'ADD_TO_FAV': {
-      if (!state.spellDetails[action.spell].favourite) {
-        const spellToUpdate = {
-          ...state.spellDetails[action.spell],
-          favourite: true,
-        }
-
-        return {
-          ...state,
-          spellDetails: {
-            ...state.spellDetails,
-            [action.spell]: spellToUpdate,
-          },
-          favourites: [...state.favourites, action.spell],
-        }
+      const spellToUpdate = {
+        ...state.spellDetails[action.spell],
+        favourite: true,
       }
-      return state
+
+      return {
+        ...state,
+        spellDetails: {
+          ...state.spellDetails,
+          [action.spell]: spellToUpdate,
+        },
+        favourites: [...state.favourites, action.spell],
+      }
     }
     case 'REMOVE_FROM_FAV': {
       const updatedFavourites = [...state.favourites].filter(
